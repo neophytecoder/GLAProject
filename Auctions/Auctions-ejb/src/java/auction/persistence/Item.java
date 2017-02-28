@@ -54,6 +54,19 @@ public class Item implements Serializable {
     public static final int DELIVERING = 3;
     public static final int DELIVERED = 4;
 
+    public Item(String name, String description, Double startPrice, Integer duration, List<Category> categories) {
+        this.name = name;
+        this.description = description;
+        this.startPrice = startPrice;
+        this.duration = duration;
+        this.categories = categories;
+    }
+
+    public Item() {
+    }
+    
+    
+
     public Long getId() {
         return id;
     }
