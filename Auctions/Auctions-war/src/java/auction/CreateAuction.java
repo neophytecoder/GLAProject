@@ -14,7 +14,10 @@ import javax.inject.Named;
 import auction.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import javax.faces.context.FacesContext;
 /**
  *
  * @author root
@@ -103,9 +106,17 @@ public class CreateAuction  {
         System.out.println(categories.toString());
         item.setCategories(categories);
         item.setDuration(duration);
-        item.setStartDate(Calendar.getInstance().getTime());
+        
+        Date startDate = Calendar.getInstance().getTime();
+        item.setStartDate(startDate);
+        
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, duration);
+        item.setEndDate(c.getTime());
         item.setState(Item.FOR_SALE);
         itemManager.createAuction(item);
         
     }
+    
+   
 }

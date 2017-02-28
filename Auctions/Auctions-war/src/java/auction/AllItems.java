@@ -11,9 +11,11 @@ import auction.persistence.ItemManager;
 import auction.persistence.UserManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.xml.registry.infomodel.User;
 
 /**
@@ -41,6 +43,7 @@ public class AllItems {
     }
     
     public void search() {
+        System.out.println("I am called search");
         user = userManager.findUser(username);
     }
     
@@ -49,5 +52,10 @@ public class AllItems {
             return new ArrayList<>();
         }
         return itemManager.findItemsByUser(user);
+    }
+    
+    public void deleteItem() {
+        System.out.println("I am called delete");
+        //user = userManager.findUser(username);
     }
 }

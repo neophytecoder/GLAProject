@@ -81,7 +81,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "auction.persistence.Category[ id=" + id + " ]";
+        return name+" ";
     }
     
 }

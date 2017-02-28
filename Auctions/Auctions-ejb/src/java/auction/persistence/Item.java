@@ -38,6 +38,8 @@ public class Item implements Serializable {
     private Integer duration; // days
     @Temporal(TemporalType.DATE)
     private Date startDate;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
     private Integer state;
     
     @ManyToOne
@@ -143,6 +145,16 @@ public class Item implements Serializable {
     public void addCategory(Category category) {
         categories.add(category);
     }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+    
+    
 
     @Override
     public int hashCode() {

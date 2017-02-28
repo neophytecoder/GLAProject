@@ -23,17 +23,50 @@ and open the template in the editor.
                              action="#{allItems.search}"/>
                
             <br/>
-        </h:form>
+            <br/>
+        
         <h:dataTable value="#{allItems.getAllItemForUser()}" var="row" border="1">
          
             <h:column>
+                <f:facet name="header">Product Name</f:facet>
                 #{row.getName()}
             </h:column>
              <h:column>
+                 <f:facet name="header">Product Description</f:facet>
                 #{row.getDescription()}
             </h:column>
-            
-            
+             <h:column>
+                 <f:facet name="header">Start price</f:facet>
+                #{row.getStartPrice()}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Start date</f:facet>
+                #{row.startDate}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Duration</f:facet>
+                #{row.duration}
+            </h:column>
+             <h:column>
+                <f:facet name="header">End date</f:facet>
+                #{row.endDate} days
+            </h:column>
+            <h:column>
+                <f:facet name="header">State</f:facet>
+                #{row.state}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Categories</f:facet>
+                #{row.categories}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                    <h:commandButton value="delete" 
+                             action="#{allItems.deleteItem}"/>
+                    <a href="delete?id=#{row.id}">delete</a>
+                
+            </h:column>
         </h:dataTable>
+        </h:form>
     </body>
 </html>
