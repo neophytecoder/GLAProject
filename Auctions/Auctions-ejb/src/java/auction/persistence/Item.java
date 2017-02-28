@@ -10,9 +10,11 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -44,7 +46,8 @@ public class Item implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
     private List<Bid> bids;
     
-    
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "item")
+    private List<Category> categories;
     
     public static final int FOR_SALE = 1;
     public static final int ORDERED = 2;
@@ -125,6 +128,18 @@ public class Item implements Serializable {
     
     public void addBid(Bid bid) {
         bids.add(bid);
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+    
+    public void addCategory(Category category) {
+        categories.add(category);
     }
 
     @Override
