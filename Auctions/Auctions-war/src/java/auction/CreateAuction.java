@@ -27,6 +27,8 @@ public class CreateAuction  {
     private Double startPrice;
     private Integer duration; // days
     private String username;
+    private String[] category;
+    private List<Category> categories;
     
     @EJB
     private UserManager userManager;
@@ -78,6 +80,13 @@ public class CreateAuction  {
        return itemManager.getCategories();
     }
 
+    public String[] getCategory() {
+        return category;
+    }
+
+    public void setCategory(String[] category) {
+        this.category = category;
+    }
     
     public void createAuction() {
         AuctionUser user =  userManager.findUser(username);
@@ -86,6 +95,13 @@ public class CreateAuction  {
         item.setDescription(description);
         item.setStartPrice(startPrice);
         item.setUser(user);
+        
+        categories = new ArrayList<>();
+        for(String idCat : category) {
+            categories.add(itemManager.findCategory(idCat));
+        }
+        System.out.println(categories.toString());
+        item.setCategories(categories);
         item.setDuration(duration);
         item.setStartDate(Calendar.getInstance().getTime());
         item.setState(Item.FOR_SALE);

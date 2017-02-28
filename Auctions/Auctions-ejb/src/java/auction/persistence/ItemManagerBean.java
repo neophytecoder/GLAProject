@@ -30,6 +30,12 @@ public class ItemManagerBean implements ItemManager {
         TypedQuery<Category> query = em.createQuery("select c from Category c", Category.class);
         return query.getResultList();
     }
+
+    @Override
+    public Category findCategory(String id) {
+        Long idCat = Long.parseLong(id);
+        return em.find(Category.class, idCat);
+    }
     
     
     

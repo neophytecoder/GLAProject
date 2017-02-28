@@ -9,32 +9,42 @@
     </h:head>
     <h:body>
         Create Auction: 
-        sss
+       
         <h:form>
-             
-                <h:inputText value="#{createAuctioni.name}"
+                Name:
+                <h:inputText value="#{createAuction.name}"
                              id="name">
                 </h:inputText>
                
+                <br/>
+                
+                Description:
                 <br/>
                 <h:inputTextarea value="#{createAuction.description}"
                              id="desc">
                 </h:inputTextarea>
                 <br/>
+                
+                Start Price:
                 <h:inputText value="#{createAuction.startPrice}"
                              id="startPrice">
                 </h:inputText>
                 <br/>
-                 
+                
+                Bid duration: 
                  <h:inputText value="#{createAuction.duration}"
                              id="duration">
                 </h:inputText>
                 <br/>
+                
+                Username:
                  <h:inputText value="#{createAuction.username}"
                              id="username">
                 </h:inputText>
+                <br/>
                 
-                <h:selectManyCheckbox>
+                Categories:
+                <h:selectManyCheckbox value="#{createAuction.category}">
                     <c:forEach var="row" items="#{createAuction.getCategories()}">
                         <f:selectItem itemValue="#{row.id}" itemLabel="#{row.name}"></f:selectItem>
                     </c:forEach>

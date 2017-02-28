@@ -18,5 +18,7 @@ public interface ItemManager {
     void createAuction(Item Item);
 
     List<Category> getCategories();
+
+    Category findCategory(String id);
     
 }

@@ -40,13 +40,13 @@ public class Item implements Serializable {
     private Date startDate;
     private Integer state;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private AuctionUser user;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
     private List<Bid> bids;
     
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "items")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "items")
     private List<Category> categories;
     
     public static final int FOR_SALE = 1;
