@@ -8,6 +8,7 @@ package auction.persistence;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,13 +21,14 @@ import javax.persistence.OneToMany;
  * @author root
  */
 @Entity
-public class User implements Serializable {
+public class AuctionUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @Column(unique = true)
     private String userName;
     private String password;
     private String name;
@@ -124,10 +126,10 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof AuctionUser)) {
             return false;
         }
-        User other = (User) object;
+        AuctionUser other = (AuctionUser) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

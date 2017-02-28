@@ -28,7 +28,7 @@ public class Bid implements Serializable {
     private Double value;
     
     @ManyToOne(cascade = CascadeType.ALL)
-    private User bidder;
+    private AuctionUser user;
     
     @ManyToOne(cascade = CascadeType.ALL)
     private Item item;
@@ -41,12 +41,12 @@ public class Bid implements Serializable {
         this.id = id;
     }
 
-    public User getBidder() {
-        return bidder;
+    public AuctionUser getUser() {
+        return user;
     }
 
-    public void setBidder(User bidder) {
-        this.bidder = bidder;
+    public void setUser(AuctionUser user) {
+        this.user = user;
     }
 
     public Item getItem() {

@@ -41,12 +41,12 @@ public class Item implements Serializable {
     private Integer state;
     
     @ManyToOne(cascade = CascadeType.ALL)
-    private User seller;
+    private AuctionUser user;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
     private List<Bid> bids;
     
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "item")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "items")
     private List<Category> categories;
     
     public static final int FOR_SALE = 1;
@@ -110,13 +110,15 @@ public class Item implements Serializable {
         this.state = state;
     }
 
-    public User getSeller() {
-        return seller;
+    public AuctionUser getUser() {
+        return user;
     }
 
-    public void setSeller(User seller) {
-        this.seller = seller;
+    public void setUser(AuctionUser user) {
+        this.user = user;
     }
+
+   
 
     public List<Bid> getBids() {
         return bids;
