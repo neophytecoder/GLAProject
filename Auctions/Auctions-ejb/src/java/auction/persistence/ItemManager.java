@@ -20,5 +20,7 @@ public interface ItemManager {
     List<Category> getCategories();
 
     Category findCategory(String id);
+
+    List<Item> findItemsByUser(AuctionUser user);
     
 }
