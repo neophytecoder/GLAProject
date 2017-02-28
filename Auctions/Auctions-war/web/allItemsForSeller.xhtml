@@ -15,11 +15,25 @@ and open the template in the editor.
     </head>
     <body>
         <h:form>
-             
-                <h:inputText value="#{createAuctioni.name}"
+            Username: 
+            <h:inputText value="#{allItems.username}"
                              id="name">
-                    
-                </h:inputText>
-         </h:form>
+            </h:inputText>
+            <h:commandButton value="create auction" 
+                             action="#{allItems.search}"/>
+               
+            <br/>
+        </h:form>
+        <h:dataTable value="#{allItems.getAllItemForUser()}" var="row" border="1">
+         
+            <h:column>
+                #{row.getName()}
+            </h:column>
+             <h:column>
+                #{row.getDescription()}
+            </h:column>
+            
+            
+        </h:dataTable>
     </body>
 </html>
