@@ -31,6 +31,15 @@ public class Category implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Item> items;
 
+    public Category(String name) {
+        this.name = name;
+    }
+
+    public Category() {
+    }
+    
+    
+
     public Long getId() {
         return id;
     }
