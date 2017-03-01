@@ -7,6 +7,7 @@ package auction.persistence;
 
 import java.util.Calendar;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +21,9 @@ import javax.persistence.TypedQuery;
 public class ItemManagerBean implements ItemManager {
     @PersistenceContext(name = "Auctions-ejbPU")
     private EntityManager em;
+    
+    @EJB
+    BidManager bidManager;
 
     @Override
     public void createAuction(Item item) {
@@ -82,7 +86,32 @@ public class ItemManagerBean implements ItemManager {
     
     @Override
     public List<Item> findItemByCategory(Long id) {
-        return em.find(Category.class, id).getItems();
+        TypedQuery<Item> query = em.createQuery("select i from Item i join fetch i.categories c where c.id = ?1 and i.endDate >= ?2", Item.class);
+        query.setParameter(1, id);
+        query.setParameter(2, Calendar.getInstance().getTime());
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Item> findItemsByBidder(Long userId) {
+        TypedQuery<Item> query = em.createQuery("select distinct(i) from Item i join fetch i.bids b where b.user.id=?1", Item.class);
+        query.setParameter(1, userId);
+        List<Item> items = query.getResultList();
+        
+        for (Item item:items) {
+            Bid bid = bidManager.findHighestBid(item.getId());
+            if (bid != null) 
+                item.setHighestBid(bid.getBidValue());
+            else 
+                item.setHighestBid(item.getStartPrice());
+            
+            bid = bidManager.findMyHighestBid(item.getId(), userId);
+            if (bid != null) 
+                item.setMyHighestBid(bid.getBidValue());
+            else 
+                item.setMyHighestBid(0.0);
+        }
+        return items;
     }
     
     

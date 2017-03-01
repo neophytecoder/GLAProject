@@ -33,5 +33,7 @@ public interface ItemManager {
     
     List<Item> findItemByCategory(Long id);
 
+    List<Item> findItemsByBidder(Long userId);
+
 
 }

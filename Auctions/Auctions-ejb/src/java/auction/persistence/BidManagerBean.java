@@ -37,6 +37,8 @@ public class BidManagerBean implements BidManager {
         }
         return null;
     }
+    
+    
 
     @Override
     public boolean bid(Long itemId, String username, Double bidValue) {
@@ -55,6 +57,18 @@ public class BidManagerBean implements BidManager {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Bid findMyHighestBid(Long itemId, Long userId) {
+        TypedQuery<Bid> query = em.createQuery("select d from Bid d join fetch d.item where d.item.id = ?1 and d.user.id=?2 ORDER BY d.bidValue DESC", Bid.class);
+        query.setParameter(1, itemId);
+        query.setParameter(2, userId);
+        List<Bid> bids = query.getResultList();
+        if (bids != null && bids.size() > 0) {
+            return bids.get(0);
+        }
+        return null;
     }
     
     

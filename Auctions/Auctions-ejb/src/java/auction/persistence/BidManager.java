@@ -17,5 +17,7 @@ public interface BidManager {
     public Bid findHighestBid(Long itemId);
 
     public boolean bid(Long itemId, String username, Double bidValue);
+
+    Bid findMyHighestBid(Long itemId, Long userId);
     
 }

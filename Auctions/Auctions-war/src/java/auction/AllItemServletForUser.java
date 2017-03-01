@@ -8,6 +8,7 @@ package auction;
 import auction.persistence.AuctionUser;
 import auction.persistence.Bid;
 import auction.persistence.BidManager;
+import auction.persistence.Category;
 import auction.persistence.Item;
 import auction.persistence.ItemManager;
 import auction.persistence.UserManager;
@@ -50,11 +51,11 @@ public class AllItemServletForUser extends HttpServlet {
            items = itemManager.findItemByName(name);
        }
        
-//       String categoryStr = request.getParameter("category");
-//       if (categoryStr != null && categoryStr.length() > 0) {
-//           
-//           items = itemManager.findItemByCategory(category);
-//       }
+       String categoryStr = request.getParameter("category");
+       if (categoryStr != null && categoryStr.length() > 0) {
+           Long category = Long.parseLong(categoryStr);
+           items = itemManager.findItemByCategory(category);
+       }
        
        for (Item item: items) {
            Bid bid = bidManager.findHighestBid(item.getId());
@@ -66,6 +67,10 @@ public class AllItemServletForUser extends HttpServlet {
        }
        
        request.setAttribute("items", items);
+       
+        List<Category> categories = itemManager.getCategories();
+        request.setAttribute("categories", categories);
+       
        
        request.getRequestDispatcher("allItemsForUser.jsp").forward(request, response);
     }

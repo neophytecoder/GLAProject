@@ -4,7 +4,6 @@
     Author     : root
 --%>
 
-<%@page import="javax.ejb.EJB"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,16 +14,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form method="get" action="allItemsForUser">
-            Search by name: <input type="text" name="name"/>
-            <input type="submit" value="search"/>
+        <h1>Hello World!</h1>
+        <form method="get" action="allItemsForBidder">
+            <input type="text" id="username"  name="username"/>
+            <input type="submit"/>
         </form>
-        Search by Category: 
-        <c:forEach items="${categories}" var="row">
-            <a href="allItemsForUser?category=${row.getId()}">${row.getName()}</a>
-        </c:forEach>
-        
         <table border="1">
+            <c:if test="${items} not null">
             <tr>
             <td>
                 Name
@@ -53,8 +49,12 @@
             <td>
                 Highest Bid
             </td>
+            <td>
+                My Highest Bid
+            </td>
             <td>Action</td>
             </tr>
+            </c:if>
             
         <c:forEach items="${items}" var="row">
             <tr>
@@ -67,7 +67,8 @@
             <td>${row.getCategories()}</td>
             <td>${row.getState()}</td>
             <td>${row.getHighestBid()}</td>
-            <td><a href="bidItem?itemId=${row.getId()}">bid</a></td>
+            <td>${row.getMyHighestBid()}</td>
+            <td><a href="cancelBid?username=${param.username}&bidId=${row.getId()}">Cancel</a></td>
             </tr>
         </c:forEach>
         </table>
