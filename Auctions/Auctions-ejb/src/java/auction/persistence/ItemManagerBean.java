@@ -82,7 +82,10 @@ public class ItemManagerBean implements ItemManager {
     
     @Override
     public List<Item> findItemByCategory(Long id) {
-        return em.find(Category.class, id).getItems();
+        TypedQuery<Item> query = em.createQuery("select i from Item i join fetch i.categories c where c.id = ?1 and i.endDate >= ?2", Item.class);
+        query.setParameter(1, id);
+        query.setParameter(2, Calendar.getInstance().getTime());
+        return query.getResultList();
     }
     
     

@@ -20,7 +20,9 @@
             <input type="submit" value="search"/>
         </form>
         Search by Category: 
-        
+        <c:forEach items="${categories}" var="row">
+            <a href="allItemsForUser?category=${row.getId()}">${row.getName()}</a>
+        </c:forEach>
         
         <table border="1">
             <tr>
