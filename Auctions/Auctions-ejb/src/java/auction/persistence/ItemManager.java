@@ -30,5 +30,8 @@ public interface ItemManager {
     Item findItemById(Long id);
     
     List<Item> findItemByName(String name);
+    
+    List<Item> findItemByCategory(Long id);
+
 
 }

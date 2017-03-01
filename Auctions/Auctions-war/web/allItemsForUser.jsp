@@ -15,6 +15,13 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <form method="get" action="allItemsForUser">
+            Search by name: <input type="text" name="name"/>
+            <input type="submit" value="search"/>
+        </form>
+        Search by Category: 
+        
+        
         <table border="1">
             <tr>
             <td>

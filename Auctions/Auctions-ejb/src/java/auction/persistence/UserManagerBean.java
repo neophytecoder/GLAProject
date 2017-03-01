@@ -23,6 +23,10 @@ public class UserManagerBean implements UserManager {
     public AuctionUser findUser(String username) {
         TypedQuery<AuctionUser> query = em.createQuery("select u from AuctionUser u where u.userName = ?1", AuctionUser.class);
         query.setParameter(1, username);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        } catch (Exception exc) {
+            return null;
+        }
     }
 }

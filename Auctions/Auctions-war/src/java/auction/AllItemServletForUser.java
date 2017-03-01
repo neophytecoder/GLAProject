@@ -45,6 +45,17 @@ public class AllItemServletForUser extends HttpServlet {
             throws ServletException, IOException {
        List<Item> items = itemManager.findAllActiveItems();
        
+       String name = request.getParameter("name");
+       if (name != null && name.length() > 0) {
+           items = itemManager.findItemByName(name);
+       }
+       
+//       String categoryStr = request.getParameter("category");
+//       if (categoryStr != null && categoryStr.length() > 0) {
+//           
+//           items = itemManager.findItemByCategory(category);
+//       }
+       
        for (Item item: items) {
            Bid bid = bidManager.findHighestBid(item.getId());
            if (bid != null) {
