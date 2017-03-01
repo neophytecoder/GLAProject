@@ -12,6 +12,7 @@ import auction.persistence.Category;
 import auction.persistence.Item;
 import auction.persistence.ItemManager;
 import auction.persistence.UserManager;
+import auction.stateful.LoginBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,18 +42,27 @@ public class AllItemServletForUser extends HttpServlet {
     @EJB 
     private BidManager bidManager;
     
+    @EJB
+    private LoginBean login;
+    
     AuctionUser user;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+       user = LoginUtil.getAuthenticatedUser(request, userManager);
+       if (user == null) {
+           response.sendRedirect("login.jsp");
+           return;
+       }
+        
        List<Item> items = itemManager.findAllActiveItems();
        
-       String username = request.getParameter("username");
-       if (username != null && username.length()>0) {
-           user = userManager.findUser(username);
-           //System.out.println(user);
-       }
+//       String username = request.getParameter("username");
+//       if (username != null && username.length()>0) {
+//           user = userManager.findUser(username);
+//       }
        
        String name = request.getParameter("name");
        if (name != null && name.length() > 0) {
@@ -74,6 +85,7 @@ public class AllItemServletForUser extends HttpServlet {
        }
        
        request.setAttribute("items", items);
+       request.setAttribute("user", user);
        
         List<Category> categories = itemManager.getCategories();
         request.setAttribute("categories", categories);

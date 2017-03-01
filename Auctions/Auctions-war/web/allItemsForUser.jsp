@@ -15,6 +15,9 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%@include file="header.jsp" %>
+        
+        
         <form method="get" action="allItemsForUser">
         <input type="text" id="username"  name="username"/>
         <input type="submit" value="set user"/>

@@ -38,10 +38,15 @@ public class AllItemServletForBidder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-       if (username != null && username.length()>0) {
-           user = userManager.findUser(username);
-           System.out.println(user);
+//        String username = request.getParameter("username");
+//       if (username != null && username.length()>0) {
+//           user = userManager.findUser(username);
+//           System.out.println(user);
+//       }
+        user = LoginUtil.getAuthenticatedUser(request, userManager);
+       if (user == null) {
+           response.sendRedirect("login.jsp");
+           return;
        }
        
        if (user != null) {
