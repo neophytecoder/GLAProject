@@ -66,6 +66,18 @@ public class ItemManagerBean implements ItemManager {
          query.setParameter(1, Calendar.getInstance().getTime());
         return query.getResultList();
     }
+
+    @Override
+    public Item findItemById(Long id) {
+        return em.find(Item.class, id);
+    }
+    
+    @Override
+    public List<Item> findItemByName(String name) {
+        TypedQuery<Item> query = em.createQuery("select i from Item i where i.name=?1", Item.class);
+        query.setParameter(1, name);
+        return query.getResultList();
+    }
     
     
 }

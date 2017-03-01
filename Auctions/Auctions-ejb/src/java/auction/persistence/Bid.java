@@ -25,7 +25,7 @@ public class Bid implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private Double value;
+    private Double bidValue;
     
     @ManyToOne(cascade = CascadeType.ALL)
     private AuctionUser user;
@@ -56,6 +56,16 @@ public class Bid implements Serializable {
     public void setItem(Item item) {
         this.item = item;
     }
+
+    public Double getBidValue() {
+        return bidValue;
+    }
+
+    public void setBidValue(Double bidValue) {
+        this.bidValue = bidValue;
+    }
+    
+    
     
     @Override
     public int hashCode() {

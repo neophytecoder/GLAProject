@@ -32,7 +32,7 @@ public class CancelItemServlet extends HttpServlet {
                 Long id = Long.parseLong(itemId);
                 itemManager.deleteItem(id);
             } catch(Exception exc) {
-                
+                System.out.println(exc);
             }
             
         }

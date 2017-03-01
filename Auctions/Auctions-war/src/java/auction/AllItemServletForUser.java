@@ -6,6 +6,8 @@
 package auction;
 
 import auction.persistence.AuctionUser;
+import auction.persistence.Bid;
+import auction.persistence.BidManager;
 import auction.persistence.Item;
 import auction.persistence.ItemManager;
 import auction.persistence.UserManager;
@@ -24,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author root
  */
-@WebServlet(name = "AllItemServlet", urlPatterns = {"/allItemsForUser"})
+@WebServlet(name = "AllItemServletForUser", urlPatterns = {"/allItemsForUser"})
 public class AllItemServletForUser extends HttpServlet {
 
     @EJB
@@ -33,12 +35,25 @@ public class AllItemServletForUser extends HttpServlet {
     @EJB
     private ItemManager itemManager;
     
+    @EJB 
+    private BidManager bidManager;
+    
     AuctionUser user;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        List<Item> items = itemManager.findAllActiveItems();
+       
+       for (Item item: items) {
+           Bid bid = bidManager.findHighestBid(item.getId());
+           if (bid != null) {
+               item.setHighestBid(bid.getBidValue());
+           } else {
+               item.setHighestBid(item.getStartPrice());
+           }
+       }
+       
        request.setAttribute("items", items);
        
        request.getRequestDispatcher("allItemsForUser.jsp").forward(request, response);

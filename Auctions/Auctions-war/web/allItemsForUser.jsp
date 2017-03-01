@@ -4,6 +4,7 @@
     Author     : root
 --%>
 
+<%@page import="javax.ejb.EJB"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,7 +16,6 @@
     </head>
     <body>
         <table border="1">
-            <c:if test="${items} not null">
             <tr>
             <td>
                 Name
@@ -41,9 +41,11 @@
             <td>
                 State
             </td>
+            <td>
+                Highest Bid
+            </td>
             <td>Action</td>
             </tr>
-            </c:if>
             
         <c:forEach items="${items}" var="row">
             <tr>
@@ -55,7 +57,8 @@
             <td>${row.getEndDate()}</td>
             <td>${row.getCategories()}</td>
             <td>${row.getState()}</td>
-            <td><a href="bidItem?username=${param.username}&itemId=${row.getId()}">Cancel</a></td>
+            <td>${row.getHighestBid()}</td>
+            <td><a href="bidItem?itemId=${row.getId()}">bid</a></td>
             </tr>
         </c:forEach>
         </table>

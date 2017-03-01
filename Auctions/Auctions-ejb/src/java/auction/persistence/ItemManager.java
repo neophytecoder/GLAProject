@@ -26,5 +26,9 @@ public interface ItemManager {
     void deleteItem(Long id);
 
     List<Item> findAllActiveItems();
+
+    Item findItemById(Long id);
     
+    List<Item> findItemByName(String name);
+
 }

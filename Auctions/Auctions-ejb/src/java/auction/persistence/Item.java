@@ -42,6 +42,9 @@ public class Item implements Serializable {
     private Date endDate;
     private Integer state;
     
+    transient Double highestBid;
+   
+    
     @ManyToOne
     private AuctionUser user;
     
@@ -166,6 +169,16 @@ public class Item implements Serializable {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    public Double getHighestBid() {
+        return highestBid;
+    }
+
+    public void setHighestBid(Double highestBid) {
+        this.highestBid = highestBid;
+    }
+    
+    
     
     
 
