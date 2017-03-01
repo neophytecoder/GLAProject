@@ -54,7 +54,9 @@ public class ItemManagerBean implements ItemManager {
     public List<Item> findItemsByUser(AuctionUser user) {
          TypedQuery<Item> query = em.createQuery("select i from Item i where i.user = ?1", Item.class);
          query.setParameter(1, user);
-        return query.getResultList();
+        List<Item> items = query.getResultList();
+        setWinner(items);
+        return items;
     }
     
     
@@ -111,8 +113,20 @@ public class ItemManagerBean implements ItemManager {
             else 
                 item.setMyHighestBid(0.0);
         }
+        setWinner(items);
         return items;
     }
+
+    @Override
+    public void setWinner(List<Item> items) {
+        for (Item item : items) {
+            if (item.getEndDate().before(Calendar.getInstance().getTime())) {
+                AuctionUser winner = bidManager.findWinner(item.getId());
+                item.setWinner(winner);
+                System.out.println("pick winner" + item.getName()+winner.getName());
+            }
+        }
+    }
     
-    
+   
 }

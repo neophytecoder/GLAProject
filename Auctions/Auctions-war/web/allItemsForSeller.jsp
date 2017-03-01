@@ -14,13 +14,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%@include file="header.jsp" %>
+        
         <form method="get" action="allItems">
             <input type="text" id="username"  name="username"/>
             <input type="submit"/>
         </form>
         <table border="1">
-            <c:if test="${items} not null">
             <tr>
             <td>
                 Name
@@ -46,9 +46,11 @@
             <td>
                 State
             </td>
+            <td>
+                Winner
+            </td>
             <td>Action</td>
             </tr>
-            </c:if>
             
         <c:forEach items="${items}" var="row">
             <tr>
@@ -60,6 +62,7 @@
             <td>${row.getEndDate()}</td>
             <td>${row.getCategories()}</td>
             <td>${row.getState()}</td>
+            <td>${row.getWinner().getName()}</td>
             <td><a href="cancelItem?username=${param.username}&itemId=${row.getId()}">Cancel</a></td>
             </tr>
         </c:forEach>

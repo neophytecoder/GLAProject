@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package auction.persistence;
+package auction.stateful;
 
+import auction.persistence.Item;
 import javax.ejb.Local;
 
 /**
@@ -12,12 +13,12 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface UserManager {
+public interface ShoppingCart {
 
-    AuctionUser findUser(String username);
+    void addToShoppingCart(Item item);
 
-    AuctionUser findUserByUsernameAndPassword(String username, String password);
+    void completeShopping();
 
-    AuctionUser findUserById(Long id);
-    
+    //List<Item> getCart();
+
 }

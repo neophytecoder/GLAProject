@@ -53,6 +53,7 @@ public class Item implements Serializable {
     
     transient Double highestBid;
     transient Double myHighestBid;
+    transient AuctionUser winner;
     
     @ManyToOne
     private AuctionUser user;
@@ -224,6 +225,14 @@ public class Item implements Serializable {
 
     public void setMyHighestBid(Double myHighestBid) {
         this.myHighestBid = myHighestBid;
+    }
+
+    public AuctionUser getWinner() {
+        return winner;
+    }
+
+    public void setWinner(AuctionUser winner) {
+        this.winner = winner;
     }
     
     

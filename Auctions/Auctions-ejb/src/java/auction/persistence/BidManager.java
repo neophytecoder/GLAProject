@@ -6,6 +6,7 @@
 package auction.persistence;
 
 import javax.ejb.Local;
+import javax.xml.registry.infomodel.User;
 
 /**
  *
@@ -22,4 +23,5 @@ public interface BidManager {
     
     void deleteAllBids(Long idItem, String username);
     
+    AuctionUser findWinner(Long itemId);
 }

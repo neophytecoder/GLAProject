@@ -5,10 +5,12 @@
  */
 package auction;
 
+import auction.persistence.AuctionUser;
 import auction.persistence.Bid;
 import auction.persistence.BidManager;
 import auction.persistence.Item;
 import auction.persistence.ItemManager;
+import auction.persistence.UserManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -30,9 +32,18 @@ public class BidItemServlet extends HttpServlet {
     
     @EJB
     private ItemManager itemManager;
+    
+    @EJB
+    private UserManager userManager;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        AuctionUser user = LoginUtil.getAuthenticatedUser(req, userManager);
+       if (user == null) {
+           resp.sendRedirect("login.jsp");
+           return;
+       }
+        
         String itemId = req.getParameter("itemId");
         Bid bid = null;
         Item item = null;
