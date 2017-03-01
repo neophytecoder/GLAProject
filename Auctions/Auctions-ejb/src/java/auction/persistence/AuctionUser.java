@@ -41,6 +41,18 @@ public class AuctionUser implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Bid> bids;
 
+    public AuctionUser() {
+    }
+
+    public AuctionUser(String userName, String password, String name, String address, String bankAccount) {
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+        this.address = address;
+        this.bankAccount = bankAccount;
+    }
+
+
     public Long getId() {
         return id;
     }
