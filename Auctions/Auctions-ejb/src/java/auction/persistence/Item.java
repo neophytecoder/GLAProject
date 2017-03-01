@@ -43,7 +43,7 @@ public class Item implements Serializable {
     private Integer state;
     
     transient Double highestBid;
-   
+    transient Double myHighestBid;
     
     @ManyToOne
     private AuctionUser user;
@@ -58,6 +58,8 @@ public class Item implements Serializable {
     public static final int ORDERED = 2;
     public static final int DELIVERING = 3;
     public static final int DELIVERED = 4;
+    
+    
 
     public Item(String name, String description, Double startPrice, Integer duration, List<Category> categories) {
         this.name = name;
@@ -65,6 +67,21 @@ public class Item implements Serializable {
         this.startPrice = startPrice;
         this.duration = duration;
         this.categories = categories;
+    }
+    
+    public Item(String name, String description, Double startPrice, Integer duration) {
+        this.name = name;
+        this.description = description;
+        this.startPrice = startPrice;
+        this.duration = duration;
+    }
+    
+    public Item(String name, String description, Double startPrice, Integer duration, Double myHighestBid) {
+        this.name = name;
+        this.description = description;
+        this.startPrice = startPrice;
+        this.duration = duration;
+        this.myHighestBid = myHighestBid;
     }
 
     public Item() {
@@ -176,6 +193,14 @@ public class Item implements Serializable {
 
     public void setHighestBid(Double highestBid) {
         this.highestBid = highestBid;
+    }
+
+    public Double getMyHighestBid() {
+        return myHighestBid;
+    }
+
+    public void setMyHighestBid(Double myHighestBid) {
+        this.myHighestBid = myHighestBid;
     }
     
     
