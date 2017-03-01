@@ -60,7 +60,6 @@ public class AutoFillingBean implements AutoFilling {
 // Add 1 item
         AuctionUser user =  userManager.findUser("user8");
         Item item = new Item();
-        em.persist(item);
         System.out.println("persist: " + item.getName());
 
         item.setName("Harley Davidson8");
@@ -83,7 +82,7 @@ public class AutoFillingBean implements AutoFilling {
         item.setEndDate(c.getTime());
         item.setState(Item.FOR_SALE);
         
-        em.merge(item);
+//        em.persist(item);
 
         System.out.println("Merge "+item.getName());
         System.out.println(item.getCategories().get(1).getName().toString());
