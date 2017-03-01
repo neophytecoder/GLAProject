@@ -16,6 +16,12 @@
     </head>
     <body>
         <form method="get" action="allItemsForUser">
+        <input type="text" id="username"  name="username"/>
+        <input type="submit" value="set user"/>
+        </form>
+        
+        <form method="get" action="allItemsForUser">
+            
             Search by name: <input type="text" name="name"/>
             <input type="submit" value="search"/>
         </form>
@@ -67,8 +73,11 @@
             <td>${row.getCategories()}</td>
             <td>${row.getState()}</td>
             <td>${row.getHighestBid()}</td>
-            <td><a href="bidItem?itemId=${row.getId()}">bid</a></td>
+            <td>
+                <c:if test="${canBid}"><a href="bidItem?itemId=${row.getId()}">bid</a></c:if>
+            </td>
             </tr>
+            
         </c:forEach>
         </table>
         

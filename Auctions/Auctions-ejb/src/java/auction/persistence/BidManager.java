@@ -20,4 +20,6 @@ public interface BidManager {
 
     Bid findMyHighestBid(Long itemId, Long userId);
     
+    void deleteAllBids(Long idItem, String username);
+    
 }

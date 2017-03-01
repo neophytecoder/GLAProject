@@ -15,6 +15,7 @@ import auction.persistence.UserManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -46,6 +47,12 @@ public class AllItemServletForUser extends HttpServlet {
             throws ServletException, IOException {
        List<Item> items = itemManager.findAllActiveItems();
        
+       String username = request.getParameter("username");
+       if (username != null && username.length()>0) {
+           user = userManager.findUser(username);
+           //System.out.println(user);
+       }
+       
        String name = request.getParameter("name");
        if (name != null && name.length() > 0) {
            items = itemManager.findItemByName(name);
@@ -71,6 +78,12 @@ public class AllItemServletForUser extends HttpServlet {
         List<Category> categories = itemManager.getCategories();
         request.setAttribute("categories", categories);
        
+        if (user != null) {
+            System.out.println("user not null"+canBid(user));
+            request.setAttribute("canBid", canBid(user));
+        } else {
+            request.setAttribute("canBid", false);
+        }
        
        request.getRequestDispatcher("allItemsForUser.jsp").forward(request, response);
     }
@@ -80,5 +93,10 @@ public class AllItemServletForUser extends HttpServlet {
         super.doPost(req, resp); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
+    boolean canBid(AuctionUser user) {
+        if(user.getEndPenalty() != null && user.getEndPenalty().after(Calendar.getInstance().getTime())) {
+            return false;
+        }
+        return true;
+    }
 }

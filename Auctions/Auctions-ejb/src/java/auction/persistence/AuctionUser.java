@@ -6,6 +6,7 @@
 package auction.persistence;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -34,6 +37,9 @@ public class AuctionUser implements Serializable {
     private String name;
     private String address;
     private String bankAccount;
+    private Integer bidPenalty;
+    @Temporal(TemporalType.DATE)
+    private Date endPenalty;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Item> sellingItems;
@@ -125,7 +131,22 @@ public class AuctionUser implements Serializable {
     public void addBid(Bid bid) {
         bids.add(bid);
     }
-    
+
+    public Integer getBidPenalty() {
+        return bidPenalty;
+    }
+
+    public void setBidPenalty(Integer bidPenalty) {
+        this.bidPenalty = bidPenalty;
+    }
+
+    public Date getEndPenalty() {
+        return endPenalty;
+    }
+
+    public void setEndPenalty(Date startPenalty) {
+        this.endPenalty = startPenalty;
+    }
 
     @Override
     public int hashCode() {
