@@ -45,11 +45,14 @@ public class AllItemServlet extends HttpServlet {
        }
        
        if (user != null) {
+           System.out.println("not null user");
            List<Item> items = itemManager.findItemsByUser(user);
            request.setAttribute("items", items);
        } else {
            request.setAttribute("items", new ArrayList<Item>());
        }
+       
+       
        
        request.getRequestDispatcher("allItemsForSeller.jsp").forward(request, response);
     }

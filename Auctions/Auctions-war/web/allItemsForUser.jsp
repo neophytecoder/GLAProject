@@ -54,9 +54,6 @@
                 Categories
             </td>
             <td>
-                State
-            </td>
-            <td>
                 Highest Bid
             </td>
             <td>Action</td>
@@ -71,7 +68,6 @@
             <td>${row.getStartDate()}</td>
             <td>${row.getEndDate()}</td>
             <td>${row.getCategories()}</td>
-            <td>${row.getState()}</td>
             <td>${row.getHighestBid()}</td>
             <td>
                 <c:if test="${canBid}"><a href="bidItem?itemId=${row.getId()}">bid</a></c:if>

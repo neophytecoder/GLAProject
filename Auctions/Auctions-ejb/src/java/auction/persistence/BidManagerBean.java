@@ -41,6 +41,17 @@ public class BidManagerBean implements BidManager {
         return null;
     }
     
+    @Override
+    public AuctionUser findWinner(Long itemId) {
+        TypedQuery<Bid> query = em.createQuery("select d from Bid d join fetch d.item where d.item.id = ?1 ORDER BY d.bidValue DESC", Bid.class);
+        query.setParameter(1, itemId);
+        List<Bid> bids = query.getResultList();
+        if (bids != null && bids.size() > 0) {
+            return bids.get(0).getUser();
+        }
+        return null;
+    }
+    
     
 
     @Override

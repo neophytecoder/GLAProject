@@ -35,5 +35,7 @@ public interface ItemManager {
 
     List<Item> findItemsByBidder(Long userId);
 
+    void setWinner(List<Item> items);
+
 
 }
