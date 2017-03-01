@@ -27,6 +27,8 @@ public class Bid implements Serializable {
     
     private Double bidValue;
     
+    public static final Integer PENALTY_DURATION = 7;
+    
     @ManyToOne(cascade = CascadeType.ALL)
     private AuctionUser user;
     

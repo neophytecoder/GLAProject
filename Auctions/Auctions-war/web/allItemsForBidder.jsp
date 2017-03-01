@@ -14,13 +14,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>All my bids</h1>
         <form method="get" action="allItemsForBidder">
             <input type="text" id="username"  name="username"/>
             <input type="submit"/>
         </form>
         <table border="1">
-            <c:if test="${items} not null">
             <tr>
             <td>
                 Name
@@ -54,7 +53,6 @@
             </td>
             <td>Action</td>
             </tr>
-            </c:if>
             
         <c:forEach items="${items}" var="row">
             <tr>
@@ -68,7 +66,7 @@
             <td>${row.getState()}</td>
             <td>${row.getHighestBid()}</td>
             <td>${row.getMyHighestBid()}</td>
-            <td><a href="cancelBid?username=${param.username}&bidId=${row.getId()}">Cancel</a></td>
+            <td><a href="cancelBid?username=${param.username}&itemId=${row.getId()}">Cancel</a></td>
             </tr>
         </c:forEach>
         </table>

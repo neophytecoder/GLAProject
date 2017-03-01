@@ -5,12 +5,15 @@
  */
 package auction.persistence;
 
+import java.util.Calendar;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.xml.registry.infomodel.User;
 
 /**
  *
@@ -70,6 +73,27 @@ public class BidManagerBean implements BidManager {
         }
         return null;
     }
+    @Override
+    public void deleteAllBids(Long idItem, String username) {
+        Query query = em.createQuery("delete from Bid b where b.user.userName=?1 and b.item.id=?2");
+        query.setParameter(1, username);
+        query.setParameter(2, idItem);
+        query.executeUpdate();
+        bidPenalty(idItem, username);
+    }
     
-    
+    public void bidPenalty(Long idItem, String username) {
+        Item item = itemManager.findItemById(idItem);
+        AuctionUser user = userManager.findUser(username);
+        if(item.getEndDate().before(Calendar.getInstance().getTime())) {
+            user.setBidPenalty(user.getBidPenalty()+1);
+            if(user.getBidPenalty() > 5) {
+                Calendar today = Calendar.getInstance();
+                today.add(Calendar.DATE, Bid.PENALTY_DURATION);
+                user.setEndPenalty(today.getTime());
+                user.setBidPenalty(0);
+            }
+            em.merge(user);
+        }
+    }
 }
