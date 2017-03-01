@@ -14,11 +14,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <form method="get" action="allItems">
-            <input type="text" id="username"  name="username"/>
-            <input type="submit"/>
-        </form>
         <table border="1">
             <c:if test="${items} not null">
             <tr>
@@ -60,7 +55,7 @@
             <td>${row.getEndDate()}</td>
             <td>${row.getCategories()}</td>
             <td>${row.getState()}</td>
-            <td><a href="cancelItem?username=${param.username}&itemId=${row.getId()}">Cancel</a></td>
+            <td><a href="bidItem?username=${param.username}&itemId=${row.getId()}">Cancel</a></td>
             </tr>
         </c:forEach>
         </table>

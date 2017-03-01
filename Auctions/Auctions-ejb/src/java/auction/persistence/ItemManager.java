@@ -24,5 +24,7 @@ public interface ItemManager {
     List<Item> findItemsByUser(AuctionUser user);
 
     void deleteItem(Long id);
+
+    List<Item> findAllActiveItems();
     
 }

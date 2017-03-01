@@ -5,6 +5,7 @@
  */
 package auction.persistence;
 
+import java.util.Calendar;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -51,9 +52,20 @@ public class ItemManagerBean implements ItemManager {
          query.setParameter(1, user);
         return query.getResultList();
     }
+    
+    
 
     @Override
     public void deleteItem(Long id) {
         em.remove(em.find(Item.class, id));
     }
+
+    @Override
+    public List<Item> findAllActiveItems() {
+         TypedQuery<Item> query = em.createQuery("select i from Item i where i.endDate >= ?1", Item.class);
+         query.setParameter(1, Calendar.getInstance().getTime());
+        return query.getResultList();
+    }
+    
+    
 }
