@@ -44,7 +44,8 @@ public class AuctionUser implements Serializable {
     public AuctionUser() {
     }
 
-    public AuctionUser(String userName, String password, String name, String address, String bankAccount) {
+    public AuctionUser(Long id, String userName, String password, String name, String address, String bankAccount) {
+        this.id = id;
         this.userName = userName;
         this.password = password;
         this.name = name;
