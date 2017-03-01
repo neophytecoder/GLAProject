@@ -47,6 +47,7 @@ public class AllItemServletForBidder extends HttpServlet {
        if (user != null) {
            List<Item> items = itemManager.findItemsByBidder(user.getId());
            request.setAttribute("items", items);
+           request.setAttribute("user", user);
        } else {
            request.setAttribute("items", new ArrayList<Item>());
        }

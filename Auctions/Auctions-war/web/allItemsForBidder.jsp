@@ -66,7 +66,12 @@
             <td>${row.getState()}</td>
             <td>${row.getHighestBid()}</td>
             <td>${row.getMyHighestBid()}</td>
-            <td><a href="cancelBid?username=${param.username}&itemId=${row.getId()}">Cancel</a></td>
+            <td>
+                <a href="cancelBid?username=${param.username}&itemId=${row.getId()}">Cancel</a>
+                <c:if test="${row.getState() == 1 && row.getWinner().getId()==user.getId()}">
+                     <a href="orderItem?username=${param.username}&itemId=${row.getId()}">Add to shopping cart</a>
+                </c:if>
+            </td>
             </tr>
         </c:forEach>
         </table>
