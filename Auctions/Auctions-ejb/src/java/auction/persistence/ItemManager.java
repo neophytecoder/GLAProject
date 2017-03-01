@@ -22,5 +22,7 @@ public interface ItemManager {
     Category findCategory(String id);
 
     List<Item> findItemsByUser(AuctionUser user);
+
+    void deleteItem(Long id);
     
 }

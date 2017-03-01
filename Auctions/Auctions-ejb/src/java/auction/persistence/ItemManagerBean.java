@@ -51,7 +51,9 @@ public class ItemManagerBean implements ItemManager {
          query.setParameter(1, user);
         return query.getResultList();
     }
-    
-    
-    
+
+    @Override
+    public void deleteItem(Long id) {
+        em.remove(em.find(Item.class, id));
+    }
 }
