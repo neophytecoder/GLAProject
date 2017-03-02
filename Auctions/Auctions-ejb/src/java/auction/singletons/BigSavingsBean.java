@@ -29,11 +29,11 @@ public class BigSavingsBean implements BigSavings {
     
     Random rnd = new Random();
 
-    @Schedule(second = "0", minute = "0", hour = "*",
+    @Schedule(second = "0", minute = "*", hour = "*",
             dayOfMonth = "*", month = "*", year = "*")
     @Override
     public void startSchedule() {
-        TypedQuery<Item> queryGoodAllItem = em.createQuery("select i from Item i where i.endDate >= ?1",
+        TypedQuery<Item> queryGoodAllItem = em.createQuery("select i from Item i where i.endDate >= ?1 and i.state=1",
                                                                                             Item.class);
         queryGoodAllItem.setParameter(1, new Date());
         List<Item> allItemsList = queryGoodAllItem.getResultList();
