@@ -126,14 +126,14 @@ public class CreateAuction2  {
         
     }
     
-    public void sendFakeRequest() {
-        BillingRequest billingRequest = new BillingRequest("FR-TEST", 100.0, "pinCode-Test");
-        System.out.println("sent: " + billingRequest.getAccountNumber() + " amount: " 
-                + billingRequest.getAmountToDebit().toString()+ " with PIN : " + billingRequest.getPinCode());
-
-//        System.out.println("sendBill: " + sendBill);
-//        sendBill.sendBillingRequest(billingRequest);
-    }
+//    public void sendFakeRequest() {
+//        BillingRequest billingRequest = new BillingRequest("FR-TEST", 100.0, "pinCode-Test");
+//        System.out.println("sent: " + billingRequest.getAccountNumber() + " amount: " 
+//                + billingRequest.getAmountToDebit().toString()+ " with PIN : " + billingRequest.getPinCode());
+//
+////        System.out.println("sendBill: " + sendBill);
+////        sendBill.sendBillingRequest(billingRequest);
+//    }
     
    
 }

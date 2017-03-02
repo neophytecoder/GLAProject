@@ -26,5 +26,8 @@ public interface ShoppingCartManager {
     Double calculateTotalShipping(List<Item> items);
 
     void confirmOrder(AuctionUser user, String bankAccount, String address);
+
+    PaymentHistory savePaymentHistory(PaymentHistory history);
+
     
 }

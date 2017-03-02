@@ -24,49 +24,48 @@ import javax.jms.MessageListener;
  * @author techron
  */
 @MessageDriven(activationConfig = {
-    @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "ReservationQueue")
-    ,
-        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue")
+    @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "ReservationQueue"),
+    @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue")
 })
 public class BillingProcessingBean implements MessageListener {
 
     @Inject
     JMSContext context;
-    
+
     @Resource(mappedName = "ResultsQueue")
     private Destination resultsQueue;
-        
+
     public BillingProcessingBean() {
     }
-    
+
     @Override
     public void onMessage(Message message) {
-        
+
         try {
             BillingRequest bill = message.getBody(BillingRequest.class);
-            System.out.println("Bill Request from account "+ bill.getAccountNumber() + " received.");
-            
+            System.out.println("Bill Request from account " + bill.getAccountNumber() + " received.");
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(BillingProcessingBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if (bill.getPinCode().trim().equals("1234")) {
+
                 bill.setResult("CONFIRMED");
                 context.createProducer().send(resultsQueue, bill);
 //                sendResultBill.sendBillingResult(bill);
-                System.out.println("Transaction for "+bill.getAccountNumber() + " CONFIRMED");
-            }
-            else {
+                System.out.println("Transaction for " + bill.getAccountNumber() + " CONFIRMED");
+            } else {
                 bill.setResult("FAIL");
                 context.createProducer().send(resultsQueue, bill);
 //                sendResultBill.sendBillingResult(bill);
-                System.out.println("Transaction for "+bill.getAccountNumber() + " FAILED");
+                System.out.println("Transaction for " + bill.getAccountNumber() + " FAILED");
 
             }
         } catch (JMSException ex) {
             Logger.getLogger(BillingProcessingBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-                
-        }
-        
-        
-        
+
     }
-    
+
+}

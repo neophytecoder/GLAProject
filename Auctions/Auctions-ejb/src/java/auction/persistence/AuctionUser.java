@@ -51,6 +51,9 @@ public class AuctionUser implements Serializable {
     
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     private ShoppingCart shoppingCart;
+    
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<PaymentHistory> histories;
 
     public AuctionUser() {
     }
@@ -160,7 +163,6 @@ public class AuctionUser implements Serializable {
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
-
     
 
     @Override
@@ -169,6 +171,15 @@ public class AuctionUser implements Serializable {
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
+
+    public List<PaymentHistory> getHistories() {
+        return histories;
+    }
+
+    public void setHistories(List<PaymentHistory> histories) {
+        this.histories = histories;
+    }
+    
     
     
 

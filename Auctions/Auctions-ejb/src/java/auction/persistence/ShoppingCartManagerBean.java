@@ -104,6 +104,14 @@ public class ShoppingCartManagerBean implements ShoppingCartManager {
             em.merge(item);
         }
     }
+
+    @Override
+    public PaymentHistory savePaymentHistory(PaymentHistory history) {
+        em.persist(history);
+        
+        return history;
+    }
+
     
     
 }

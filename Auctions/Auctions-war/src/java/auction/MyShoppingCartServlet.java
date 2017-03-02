@@ -14,6 +14,8 @@ import auction.stateless.SendBillingRequest;
 import bank.requests.BillingRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -56,9 +58,15 @@ public class MyShoppingCartServlet extends HttpServlet {
         String address = req.getParameter("address");
         String bankAccount = req.getParameter("bankAccount");
         String pinCode = req.getParameter("pin");
+        Date today = Calendar.getInstance().getTime();
+        Long userId = user.getId();
+        String itemsStr= "";
+        for (Item item: items) {
+            itemsStr += item.getName()+", ";
+        }
         
         shoppingCartManager.confirmOrder(user, bankAccount, address);
-        BillingRequest request = new BillingRequest(bankAccount, totalOrder, pinCode);
+        BillingRequest request = new BillingRequest(bankAccount, totalOrder, pinCode, "BEING PROCESSED", itemsStr, userId, today);
         System.out.println(request);
         sendBillingRequest.sendBillingRequest(request);
         
@@ -85,6 +93,9 @@ public class MyShoppingCartServlet extends HttpServlet {
         
         req.setAttribute("address", user.getAddress());
         req.setAttribute("bankAccount", user.getBankAccount());
+        
+        req.setAttribute("histories", user.getHistories());
+        System.out.println(user.getHistories());
         
         req.getRequestDispatcher("myShoppingCart.jsp").forward(req, resp);
     }

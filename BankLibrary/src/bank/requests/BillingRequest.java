@@ -6,6 +6,7 @@
 package bank.requests;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -17,6 +18,10 @@ public class BillingRequest implements Serializable{
     private Double amountToDebit;
     private String pinCode;
     private String result;
+    private String items;
+    private Long userId;
+    private Date transactionDate;
+    private Long id;
 
     public String getResult() {
         return result;
@@ -29,12 +34,51 @@ public class BillingRequest implements Serializable{
     public BillingRequest() {
     }
 
-    public BillingRequest(String accountNumber, Double amountToDebit, String pinCode) {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    
+    
+    public BillingRequest(String accountNumber, Double amountToDebit, String pinCode, String result, String items, Long userId, Date transactionDate) {
         this.accountNumber = accountNumber;
         this.amountToDebit = amountToDebit;
         this.pinCode = pinCode;
-        this.result="";
+        this.result = result;
+        this.items = items;
+        this.userId = userId;
+        this.transactionDate = transactionDate;
     }
+
+    public String getItems() {
+        return items;
+    }
+
+    public void setItems(String items) {
+        this.items = items;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+    
+    
 
     public String getAccountNumber() {
         return accountNumber;

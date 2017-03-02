@@ -66,5 +66,6 @@
         <a type="button" href="myShoppingCart?pay=true">Order items</a>
        
          <%@include file="paymentForm.jsp" %>
+         <%@include file="myShoppingHistory.jsp" %>
     </body>
 </html>
