@@ -41,6 +41,15 @@ public class Item implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date endDate;
     private Integer state;
+    private Boolean freeDelivery = false;
+
+    public Boolean getFreeDelivery() {
+        return freeDelivery;
+    }
+
+    public void setFreeDelivery(Boolean freeDelivery) {
+        this.freeDelivery = freeDelivery;
+    }
     
     @ManyToOne
     private ShoppingCart shoppingCart;
@@ -62,6 +71,20 @@ public class Item implements Serializable {
     public static final int ORDERED = 2;
     public static final int DELIVERING = 3;
     public static final int DELIVERED = 4;
+
+    public Item(Long id, String name, String description, Double startPrice, Integer duration, Date startDate, Date endDate, Integer state, AuctionUser user, List<Category> categories) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.startPrice = startPrice;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.state = state;
+        this.user = user;
+        this.categories = categories;
+    }
+    
     
     
 
