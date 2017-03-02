@@ -15,8 +15,8 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
+        <h1>My bids</h1>
         
-        <h1>All my bids</h1>
         <table border="1">
             <tr>
             <td>

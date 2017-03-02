@@ -14,9 +14,11 @@
     <body>
 
         <h2>
+        
         <a href="allItemsForUser">All items</a>
-        <a href="allItemsForBidder">See my bid</a>
+        <a href="allItemsForBidder">My bids</a>
         <a href="allItems">My selling items</a>
+        <a href="createAuction">Create Auction</a>
         <a href="logout">logout</a>
         </h2>
 

@@ -15,6 +15,7 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
+        <h1>My Selling Items</h1>
         
         <table border="1">
             <tr>

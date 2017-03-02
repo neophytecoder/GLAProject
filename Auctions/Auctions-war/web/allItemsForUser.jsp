@@ -16,6 +16,7 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
+        <h1>All items</h1>
         
         <form method="get" action="allItemsForUser">
             
