@@ -12,8 +12,7 @@ import javax.ejb.Local;
  * @author techron
  */
 @Local
-public interface AutoFilling {
-
-    public void initDBFilling();
-
+public interface BigSavings {
+        public void startSchedule();
+    
 }

@@ -6,6 +6,7 @@
 package auction.persistence;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -29,7 +30,7 @@ public class Category implements Serializable {
     private String name;
     
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();
 
     public Category(Long id, String name) {
         this.id = id;
