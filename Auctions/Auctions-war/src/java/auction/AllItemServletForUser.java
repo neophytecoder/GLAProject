@@ -13,6 +13,7 @@ import auction.persistence.Item;
 import auction.persistence.ItemManager;
 import auction.persistence.UserManager;
 import auction.stateful.LoginBean;
+import auction.stateless.LoginUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -45,24 +46,22 @@ public class AllItemServletForUser extends HttpServlet {
     @EJB
     private LoginBean login;
     
+    @EJB
+    private LoginUtil loginUtil;
+    
     AuctionUser user;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       user = LoginUtil.getAuthenticatedUser(request, userManager);
+       user = loginUtil.getAuthenticatedUser(request);
        if (user == null) {
            response.sendRedirect("login.jsp");
            return;
        }
         
        List<Item> items = itemManager.findAllActiveItems();
-       
-//       String username = request.getParameter("username");
-//       if (username != null && username.length()>0) {
-//           user = userManager.findUser(username);
-//       }
        
        String name = request.getParameter("name");
        if (name != null && name.length() > 0) {

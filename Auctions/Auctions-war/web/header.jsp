@@ -12,15 +12,15 @@
         <title>JSP Page</title>
     </head>
     <body>
+
         <h2>
         <a href="allItemsForUser">All items</a>
         <a href="allItemsForBidder">See my bid</a>
         <a href="allItems">My selling items</a>
         <a href="logout">logout</a>
         </h2>
-        <br/>
+
         <h3>Hi User: ${user.getUserName()}</h3>
          <br/>
-        <br/>
     </body>
 </html>

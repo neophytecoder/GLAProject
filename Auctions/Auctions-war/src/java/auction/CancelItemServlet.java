@@ -8,6 +8,7 @@ package auction;
 import auction.persistence.AuctionUser;
 import auction.persistence.ItemManager;
 import auction.persistence.UserManager;
+import auction.stateless.LoginUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -23,34 +24,37 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CancelItemServlet", urlPatterns = {"/cancelItem"})
 public class CancelItemServlet extends HttpServlet {
+
     @EJB
     ItemManager itemManager;
-    
+
     @EJB
     UserManager userManager;
-    
+
+    @EJB
+    LoginUtil loginUtil;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AuctionUser user = LoginUtil.getAuthenticatedUser(req, userManager);
-       if (user == null) {
-           resp.sendRedirect("login.jsp");
-           return;
-       }
-       String username = user.getUserName();
-        
+        AuctionUser user = loginUtil.getAuthenticatedUser(req);
+        if (user == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
+        String username = user.getUserName();
+
         String itemId = req.getParameter("itemId");
         if (itemId != null && itemId.length() > 0) {
             try {
                 Long id = Long.parseLong(itemId);
                 itemManager.deleteItem(id);
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 System.out.println(exc);
             }
-            
+
         }
-        
-        resp.sendRedirect("allItems?username="+username);
+
+        resp.sendRedirect("allItems?username=" + username);
     }
 
-    
 }

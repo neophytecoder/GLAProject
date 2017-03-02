@@ -25,8 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author root
  */
-@WebServlet(name = "AllItemServletForBidder", urlPatterns = {"/allItemsForBidder"})
-public class AllItemServletForBidder extends HttpServlet {
+@WebServlet(name = "AllItemServlet", urlPatterns = {"/allItems"})
+public class AllItemServletForSeller extends HttpServlet {
 
     @EJB
     private UserManager userManager;
@@ -42,6 +42,7 @@ public class AllItemServletForBidder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         user = loginUtil.getAuthenticatedUser(request);
         if (user == null) {
             response.sendRedirect("login.jsp");
@@ -49,14 +50,16 @@ public class AllItemServletForBidder extends HttpServlet {
         }
 
         if (user != null) {
-            List<Item> items = itemManager.findItemsByBidder(user.getId());
+            System.out.println("not null user");
+            List<Item> items = itemManager.findItemsByUser(user);
             request.setAttribute("items", items);
-            request.setAttribute("user", user);
         } else {
             request.setAttribute("items", new ArrayList<Item>());
         }
 
-        request.getRequestDispatcher("allItemsForBidder.jsp").forward(request, response);
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("allItemsForSeller.jsp").forward(request, response);
     }
 
+    
 }

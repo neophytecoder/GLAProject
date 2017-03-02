@@ -11,6 +11,7 @@ import auction.persistence.BidManager;
 import auction.persistence.Item;
 import auction.persistence.ItemManager;
 import auction.persistence.UserManager;
+import auction.stateless.LoginUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -35,10 +36,13 @@ public class BidItemServlet extends HttpServlet {
     
     @EJB
     private UserManager userManager;
+    
+    @EJB
+    private LoginUtil loginUtil;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AuctionUser user = LoginUtil.getAuthenticatedUser(req, userManager);
+        AuctionUser user = loginUtil.getAuthenticatedUser(req);
        if (user == null) {
            resp.sendRedirect("login.jsp");
            return;
@@ -74,7 +78,7 @@ public class BidItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AuctionUser user = LoginUtil.getAuthenticatedUser(req, userManager);
+        AuctionUser user = loginUtil.getAuthenticatedUser(req);
        if (user == null) {
            resp.sendRedirect("login.jsp");
            return;
@@ -82,7 +86,6 @@ public class BidItemServlet extends HttpServlet {
         
         String itemIdStr = req.getParameter("itemId");
         String priceStr = req.getParameter("price");
-        //String username = req.getParameter("username");
         String username = user.getUserName();
         boolean result = false;
         try {

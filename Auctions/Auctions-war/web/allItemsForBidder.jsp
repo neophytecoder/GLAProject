@@ -17,10 +17,6 @@
         <%@include file="header.jsp" %>
         
         <h1>All my bids</h1>
-        <form method="get" action="allItemsForBidder">
-            <input type="text" id="username"  name="username"/>
-            <input type="submit"/>
-        </form>
         <table border="1">
             <tr>
             <td>

@@ -16,10 +16,6 @@
     <body>
         <%@include file="header.jsp" %>
         
-        <form method="get" action="allItems">
-            <input type="text" id="username"  name="username"/>
-            <input type="submit"/>
-        </form>
         <table border="1">
             <tr>
             <td>

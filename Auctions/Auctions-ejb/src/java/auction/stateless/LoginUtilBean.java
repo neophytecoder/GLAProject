@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package auction;
+package auction.stateless;
 
 import auction.persistence.AuctionUser;
 import auction.persistence.UserManager;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,12 +16,19 @@ import javax.servlet.http.HttpSession;
  *
  * @author root
  */
-public class LoginUtil {
-    public static AuctionUser getAuthenticatedUser(HttpServletRequest request, UserManager userManager) {
+@Stateless
+public class LoginUtilBean implements LoginUtil {
+    @EJB
+    private UserManager userManager;
+    
+    @Override
+    public AuctionUser getAuthenticatedUser(HttpServletRequest request) {
         try {
             HttpSession session = request.getSession();
             Long userId = (Long) session.getAttribute("idUser");
             AuctionUser user = userManager.findUserById(userId);
+            
+            request.setAttribute("user", user);
             
             return user;
         } catch(Exception exc) {
