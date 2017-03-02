@@ -16,6 +16,15 @@ public class BillingRequest implements Serializable{
     private String accountNumber;
     private Double amountToDebit;
     private String pinCode;
+    private String result;
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
 
     public BillingRequest() {
     }
@@ -24,6 +33,7 @@ public class BillingRequest implements Serializable{
         this.accountNumber = accountNumber;
         this.amountToDebit = amountToDebit;
         this.pinCode = pinCode;
+        this.result="";
     }
 
     public String getAccountNumber() {
