@@ -5,7 +5,9 @@
  */
 package auction;
 
+import auction.persistence.AuctionUser;
 import auction.persistence.ItemManager;
+import auction.persistence.UserManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -24,8 +26,18 @@ public class CancelItemServlet extends HttpServlet {
     @EJB
     ItemManager itemManager;
     
+    @EJB
+    UserManager userManager;
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        AuctionUser user = LoginUtil.getAuthenticatedUser(req, userManager);
+       if (user == null) {
+           resp.sendRedirect("login.jsp");
+           return;
+       }
+       String username = user.getUserName();
+        
         String itemId = req.getParameter("itemId");
         if (itemId != null && itemId.length() > 0) {
             try {
@@ -37,7 +49,7 @@ public class CancelItemServlet extends HttpServlet {
             
         }
         
-        resp.sendRedirect("allItems?username="+req.getParameter("username"));
+        resp.sendRedirect("allItems?username="+username);
     }
 
     
