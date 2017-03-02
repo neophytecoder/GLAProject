@@ -15,6 +15,7 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
+        <h1>My Selling Items</h1>
         
         <table border="1">
             <tr>
@@ -53,7 +54,7 @@
             <td>${row.getName()}</td>
             <td>${row.getDescription()}</td>
             <td>${row.getStartPrice()}</td>
-            <td>${row.getDuration()}</td>
+            <td>${row.getDuration()} days</td>
             <td>${row.getStartDate()}</td>
             <td>${row.getEndDate()}</td>
             <td>${row.getCategories()}</td>

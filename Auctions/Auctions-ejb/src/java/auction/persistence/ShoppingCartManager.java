@@ -5,6 +5,7 @@
  */
 package auction.persistence;
 
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -15,5 +16,9 @@ import javax.ejb.Local;
 public interface ShoppingCartManager {
 
     void addToShoppingCart(Item item, AuctionUser user);
+
+    List<Item> findAllItemsInMyShoppingCart(AuctionUser user);
+
+    void cancelShoppingCart(Long itemId);
     
 }
