@@ -19,6 +19,7 @@
         <a href="allItemsForBidder">My bids</a>
         <a href="allItems">My selling items</a>
         <a href="createAuction">Create auction</a>
+        <a href="myShoppingCart">My shopping cart</a>
         <a href="logout">Logout</a>
         </h2>
 
