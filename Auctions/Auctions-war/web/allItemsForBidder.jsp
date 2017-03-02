@@ -61,7 +61,7 @@
             <td>${row.getStartDate()}</td>
             <td>${row.getEndDate()}</td>
             <td>${row.getCategories()}</td>
-            <td>${row.getState()}</td>
+            <td><%@include file="statePrinter.jsp" %></td>
             <td>${row.getHighestBid()}</td>
             <td>${row.getMyHighestBid()}</td>
             <td>

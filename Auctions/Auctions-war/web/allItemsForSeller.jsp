@@ -58,7 +58,7 @@
             <td>${row.getStartDate()}</td>
             <td>${row.getEndDate()}</td>
             <td>${row.getCategories()}</td>
-            <td>${row.getState()}</td>
+            <td><%@include file="statePrinter.jsp" %></td>
             <td>${row.getWinner().getName()}</td>
             <td><a href="cancelItem?username=${param.username}&itemId=${row.getId()}">Cancel</a></td>
             </tr>
