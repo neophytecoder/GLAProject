@@ -74,9 +74,16 @@ public class BidItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        AuctionUser user = LoginUtil.getAuthenticatedUser(req, userManager);
+       if (user == null) {
+           resp.sendRedirect("login.jsp");
+           return;
+       }
+        
         String itemIdStr = req.getParameter("itemId");
         String priceStr = req.getParameter("price");
-        String username = req.getParameter("username");
+        //String username = req.getParameter("username");
+        String username = user.getUserName();
         boolean result = false;
         try {
             Long itemId = Long.parseLong(itemIdStr);

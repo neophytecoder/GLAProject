@@ -127,6 +127,12 @@ public class ItemManagerBean implements ItemManager {
             }
         }
     }
+
+    @Override
+    public void changeStatus(Item item, int status) {
+        item.setState(status);
+        em.merge(item);
+    }
     
    
 }

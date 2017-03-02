@@ -5,6 +5,10 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="eclipselink.query-results-cache" value="false"/>
+      <property name="eclipselink.jdbc.cache-statements" value="false"/>
+      <property name="eclipselink.jdbc.cache-statements.size" value="0"/>
+      <property name="eclipselink.flush-clear.cache" value="Drop"/>
     </properties>
   </persistence-unit>
 </persistence>

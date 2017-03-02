@@ -42,6 +42,9 @@ public class Item implements Serializable {
     private Date endDate;
     private Integer state;
     
+    @ManyToOne
+    private ShoppingCart shoppingCart;
+    
     transient Double highestBid;
     transient Double myHighestBid;
     transient AuctionUser winner;
@@ -211,11 +214,18 @@ public class Item implements Serializable {
     public void setWinner(AuctionUser winner) {
         this.winner = winner;
     }
-    
-    
-    
-    
 
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

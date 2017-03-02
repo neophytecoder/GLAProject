@@ -11,11 +11,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -46,6 +48,9 @@ public class AuctionUser implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Bid> bids;
+    
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    private ShoppingCart shoppingCart;
 
     public AuctionUser() {
     }
@@ -147,6 +152,16 @@ public class AuctionUser implements Serializable {
     public void setEndPenalty(Date startPenalty) {
         this.endPenalty = startPenalty;
     }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
+    
 
     @Override
     public int hashCode() {

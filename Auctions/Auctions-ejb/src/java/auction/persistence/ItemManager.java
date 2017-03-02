@@ -37,5 +37,7 @@ public interface ItemManager {
 
     void setWinner(List<Item> items);
 
+    void changeStatus(Item item, int status);
+
 
 }
