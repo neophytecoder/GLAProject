@@ -35,6 +35,7 @@ public class ShoppingCart implements Serializable {
     private AuctionUser user;
     
     private String address;
+    private String bankAccount;
 
     public Long getId() {
         return id;
@@ -74,6 +75,14 @@ public class ShoppingCart implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public String getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
+    }
     
     
     
@@ -97,6 +106,8 @@ public class ShoppingCart implements Serializable {
         }
         return true;
     }
+    
+    
 
     @Override
     public String toString() {

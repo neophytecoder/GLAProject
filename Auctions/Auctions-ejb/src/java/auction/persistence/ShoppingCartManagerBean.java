@@ -44,6 +44,7 @@ public class ShoppingCartManagerBean implements ShoppingCartManager {
             return new ArrayList<>();
         }
         
+        List<Item> returnedItems = new ArrayList<>();
         List<Item> items = cart.getItems();
         for (Item item : items) {
             Bid bid = bidManager.findHighestBid(item.getId());
@@ -51,9 +52,12 @@ public class ShoppingCartManagerBean implements ShoppingCartManager {
                 item.setHighestBid(bid.getBidValue());
             else 
                 item.setHighestBid(item.getStartPrice());
+            if (item.getState() == Item.ORDERED) {
+                returnedItems.add(item);
+            }
         }
         
-        return items;
+        return returnedItems;
     }
 
     @Override
@@ -65,6 +69,40 @@ public class ShoppingCartManagerBean implements ShoppingCartManager {
             em.merge(item);
         }
         
+    }
+
+    @Override
+    public Double calculateTotalOrder(List<Item> items) {
+        Double price = 0.0;
+        for (Item item: items) {
+            price += item.getHighestBid();
+        }
+        return price;
+    }
+
+    @Override
+    public Double calculateTotalShipping(List<Item> items) {
+        Double price = 0.0;
+        for (Item item: items) {
+            if (!item.getFreeDelivery())
+                price += 5;
+        }
+        return price;
+    }
+
+    @Override
+    public void confirmOrder(AuctionUser user, String bankAccount, String address) {
+        ShoppingCart cart = user.getShoppingCart();
+        cart.setBankAccount(bankAccount);
+        cart.setAddress(address);
+        
+        em.merge(cart);
+        
+        List<Item> items = cart.getItems();
+        for (Item item: items) {
+            item.setState(Item.DELIVERING);
+            em.merge(item);
+        }
     }
     
     

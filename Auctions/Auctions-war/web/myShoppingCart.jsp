@@ -34,6 +34,9 @@
                     Price
                 </td>
                 <td>
+                    Shipping cost
+                </td>
+                <td>
                     Action
                 </td>
             </tr>
@@ -45,12 +48,23 @@
             <td>${row.getCategories()}</td>
             <td>${row.getHighestBid()}</td>
             <td>
+                <c:if test="${not row.getFreeDelivery()}">
+                    5 
+                </c:if>
+                <c:if test="${row.getFreeDelivery()}">
+                    free
+                </c:if>
+            </td>
+            <td>
                 <a href="cancelShoppingCart?itemId=${row.getId()}">Cancel item</a>
             </td>
             </tr>
             
         </c:forEach>
         </table>
-        
+        <br/>
+        <a type="button" href="myShoppingCart?pay=true">Order items</a>
+       
+         <%@include file="paymentForm.jsp" %>
     </body>
 </html>

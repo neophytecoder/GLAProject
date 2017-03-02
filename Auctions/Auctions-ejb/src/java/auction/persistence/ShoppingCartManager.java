@@ -20,5 +20,11 @@ public interface ShoppingCartManager {
     List<Item> findAllItemsInMyShoppingCart(AuctionUser user);
 
     void cancelShoppingCart(Long itemId);
+
+    Double calculateTotalOrder(List<Item> items);
+
+    Double calculateTotalShipping(List<Item> items);
+
+    void confirmOrder(AuctionUser user, String bankAccount, String address);
     
 }

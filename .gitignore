@@ -13,3 +13,9 @@ hs_err_pid*
 /Auctions/nbproject/private/
 /Auctions/Auctions-war/nbproject/private/
 /Auctions/Auctions-ejb/nbproject/private/
+/BankLibrary/nbproject/private/
+/BillingApplication/nbproject/private/
+/BankLibrary/build/
+/BankLibrary/dist/
+/BillingApplication/build/
+/BillingApplication/dist/

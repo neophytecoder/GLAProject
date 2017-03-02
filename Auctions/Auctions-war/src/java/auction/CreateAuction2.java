@@ -44,8 +44,8 @@ public class CreateAuction2  {
     @EJB
     private ItemManager itemManager;
     
-    @EJB
-    private SendBillingRequest sendBill;
+//    @EJB
+//    private SendBillingRequest sendBill;
 
     public String getName() {
         return name;
@@ -131,8 +131,8 @@ public class CreateAuction2  {
         System.out.println("sent: " + billingRequest.getAccountNumber() + " amount: " 
                 + billingRequest.getAmountToDebit().toString()+ " with PIN : " + billingRequest.getPinCode());
 
-        System.out.println("sendBill: " + sendBill);
-        sendBill.sendBillingRequest(billingRequest);
+//        System.out.println("sendBill: " + sendBill);
+//        sendBill.sendBillingRequest(billingRequest);
     }
     
    
