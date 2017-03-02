@@ -23,7 +23,7 @@
             <p>Start Price: <input type="text" name="startPrice"/></p>
             <p>Duration: <input type="text" name="duration"/></p>
 
-            <p>
+            <p> Categories: 
                 <c:forEach var="row" items="${categories}">
                     <input type="checkbox" name="category" value="${row.id}"/>${row.name} 
                 </c:forEach>

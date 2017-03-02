@@ -51,7 +51,7 @@ public class Item implements Serializable {
         this.freeDelivery = freeDelivery;
     }
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private ShoppingCart shoppingCart;
     
     transient Double highestBid;

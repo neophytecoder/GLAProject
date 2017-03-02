@@ -27,7 +27,7 @@
         <c:forEach items="${categories}" var="row">
             <a href="allItemsForUser?category=${row.getId()}">${row.getName()}</a>
         </c:forEach>
-        
+        <br/><br/>
         <table border="1">
             <tr>
             <td>
@@ -62,7 +62,7 @@
             <td>${row.getName()}</td>
             <td>${row.getDescription()}</td>
             <td>${row.getStartPrice()}</td>
-            <td>${row.getDuration()}</td>
+            <td>${row.getDuration()} days</td>
             <td>${row.getStartDate()}</td>
             <td>${row.getEndDate()}</td>
             <td>${row.getCategories()}</td>

@@ -57,7 +57,7 @@
             <td>${row.getName()}</td>
             <td>${row.getDescription()}</td>
             <td>${row.getStartPrice()}</td>
-            <td>${row.getDuration()}</td>
+            <td>${row.getDuration()} days</td>
             <td>${row.getStartDate()}</td>
             <td>${row.getEndDate()}</td>
             <td>${row.getCategories()}</td>
@@ -65,7 +65,7 @@
             <td>${row.getHighestBid()}</td>
             <td>${row.getMyHighestBid()}</td>
             <td>
-                <a href="cancelBid?username=${param.username}&itemId=${row.getId()}">Cancel</a>
+                <a href="cancelBid?username=${param.username}&itemId=${row.getId()}">Quit Auction</a>
                 <c:if test="${row.getState() == 1 && row.getWinner().getId()==user.getId()}">
                      <a href="addToShoppingCart?itemId=${row.getId()}">Add to shopping cart</a>
                 </c:if>

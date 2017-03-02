@@ -18,12 +18,19 @@ public class ShoppingCartManagerBean implements ShoppingCartManager {
     @PersistenceContext(unitName = "Auctions-ejbPU")
     EntityManager em;
     
+    
+    
     @Override
     public void addToShoppingCart(Item item, AuctionUser user) {
-        ShoppingCart cart = new ShoppingCart();
-        cart.addItem(item);
-        cart.setUser(user);
-        em.persist(cart);
+        ShoppingCart cart = user.getShoppingCart();
+        if (cart == null) {
+            cart = new ShoppingCart();
+            cart.setUser(user);
+            em.persist(cart);
+        }
+        
+        item.setShoppingCart(cart);
+        em.merge(item);
     }
     
 }
