@@ -141,6 +141,9 @@ public class AuctionUser implements Serializable {
     }
 
     public Integer getBidPenalty() {
+        if (bidPenalty == null) {
+            return 0;
+        }
         return bidPenalty;
     }
 
