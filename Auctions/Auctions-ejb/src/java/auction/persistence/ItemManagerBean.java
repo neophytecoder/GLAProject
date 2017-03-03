@@ -55,7 +55,11 @@ public class ItemManagerBean implements ItemManager {
          TypedQuery<Item> query = em.createQuery("select i from Item i where i.user = ?1", Item.class);
          query.setParameter(1, user);
         List<Item> items = query.getResultList();
-        setWinner(items);
+        try {
+            setWinner(items);
+        } catch(Exception exc) {
+            
+        }
         return items;
     }
     
