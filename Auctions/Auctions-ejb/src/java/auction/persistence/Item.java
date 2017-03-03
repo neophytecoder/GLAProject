@@ -215,6 +215,9 @@ public class Item implements Serializable {
     }
 
     public Double getHighestBid() {
+        if (highestBid == null) {
+            return 0.0;
+        }
         return highestBid;
     }
 
