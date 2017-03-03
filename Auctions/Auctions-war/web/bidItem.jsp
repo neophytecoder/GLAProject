@@ -14,13 +14,24 @@
     <body>
         <%@include file="header.jsp" %>
         
-        <h1>Item: ${item.getName()}</h1>
-        Bid must be greater than ${bidValue}. Grab it fast!
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="min-height:0px;">
+                <div class="alert alert-info">Item: ${item.getName()}</div>
+            </div>
+        </div>
         
-        <form method="post">
-            <input type="hidden" name="itemId" value="${item.getId()}"/>
-            Bid value:  <input type="text" name="price"/>
-            <p><input type="submit"/></p>
-        </form>
+        
+        
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="min-height:50px;">
+            Bid must be greater than <b>${bidValue}</b>. Grab it fast!
+            <form method="post">
+                <input type="hidden" name="itemId" value="${item.getId()}"/>
+                Bid value:  <input type="text" name="price"/>
+                <!--p><input type="submit"/></p-->
+                <br/><br/>
+                <button type="submit" class="btn btn-info btn-lg">Submit query</button>   
+        
+            </form>
+        </div>
     </body>
 </html>

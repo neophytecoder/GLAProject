@@ -15,64 +15,54 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
-        <h1>My bids</h1>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="min-height:0px;">
+                <div class="alert alert-info">My bids</div>
+            </div>
+        </div>
         
-        <table border="1">
-            <tr>
-            <td>
-                Name
-            </td>
-            <td>
-                Description
-            </td>
-            <td>
-                Start price
-            </td>
-            <td>
-                Duration
-            </td>
-            <td>
-                Start Date
-            </td>
-            <td>
-                End Date
-            </td>
-            <td>
-                Categories
-            </td>
-            <td>
-                State
-            </td>
-            <td>
-                Highest Bid
-            </td>
-            <td>
-                My Highest Bid
-            </td>
-            <td>Action</td>
-            </tr>
+        
+        <div class="container">          
+            <table class="table table-bordered table-hover table-condensed">
+              <thead>
+                <tr class="bg-info">
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Start price</th>
+                  <th>Duration</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Categories</th>
+                  <th>Status</th>
+                  <th>Highest Bid</th>
+                  <th>My Highest Bid</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody
             
-        <c:forEach items="${items}" var="row">
-            <tr>
-            <td>${row.getName()}</td>
-            <td>${row.getDescription()}</td>
-            <td>${row.getStartPrice()}</td>
-            <td>${row.getDuration()} days</td>
-            <td>${row.getStartDate()}</td>
-            <td>${row.getEndDate()}</td>
-            <td>${row.getCategories()}</td>
-            <td><%@include file="statePrinter.jsp" %></td>
-            <td>${row.getHighestBid()}</td>
-            <td>${row.getMyHighestBid()}</td>
-            <td>
-                <a href="cancelBid?username=${param.username}&itemId=${row.getId()}">Quit Auction</a>
-                <c:if test="${row.getState() == 1 && row.getWinner().getId()==user.getId()}">
-                     <a href="addToShoppingCart?itemId=${row.getId()}">Add to shopping cart</a>
-                </c:if>
-            </td>
-            </tr>
-        </c:forEach>
-        </table>
-        
+                <c:forEach items="${items}" var="row">
+                    <tr>
+                        <td style="font-weight: bold">${row.getName()}</td>
+                        <td>${row.getDescription()}</td>
+                        <td style="font-weight: bold">${row.getStartPrice()}</td>
+                        <td>${row.getDuration()} days</td>
+                        <td>${row.getStartDate()}</td>
+                        <td>${row.getEndDate()}</td>
+                        <td>${row.getCategories()}</td>
+                        <td><%@include file="statePrinter.jsp" %></td>
+                        <td style="font-weight: bold">${row.getHighestBid()}</td>
+                        <td style="font-weight: bold">${row.getMyHighestBid()}</td>
+                        <td>
+                        <a href="cancelBid?username=${param.username}&itemId=${row.getId()}">Quit Auction</a>
+                        <c:if test="${row.getState() == 1 && row.getWinner().getId()==user.getId()}">
+                             <a href="addToShoppingCart?itemId=${row.getId()}">Add to shopping cart</a>
+                        </c:if>
+                    </td>
+                    </tr>
+                </c:forEach>
+              </tbody>
+              </table>
+        </div>
     </body>
 </html>

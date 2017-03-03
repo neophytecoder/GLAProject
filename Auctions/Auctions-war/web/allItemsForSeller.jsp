@@ -15,55 +15,46 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
-        <h1>My Selling Items</h1>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="min-height:0px;">
+                <div class="alert alert-info">My Selling Items</div>
+            </div>
+        </div>
         
-        <table border="1">
-            <tr>
-            <td>
-                Name
-            </td>
-            <td>
-                Description
-            </td>
-            <td>
-                Start price
-            </td>
-            <td>
-                Duration
-            </td>
-            <td>
-                Start Date
-            </td>
-            <td>
-                End Date
-            </td>
-            <td>
-                Categories
-            </td>
-            <td>
-                State
-            </td>
-            <td>
-                Winner
-            </td>
-            <td>Action</td>
-            </tr>
+        <div class="container">          
+            <table class="table table-bordered table-hover table-condensed">
+              <thead>
+                <tr class="bg-info">
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Start price</th>
+                  <th>Duration</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Categories</th>
+                  <th>State</th>
+                  <th>Winner</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody
             
-        <c:forEach items="${items}" var="row">
-            <tr>
-            <td>${row.getName()}</td>
-            <td>${row.getDescription()}</td>
-            <td>${row.getStartPrice()}</td>
-            <td>${row.getDuration()} days</td>
-            <td>${row.getStartDate()}</td>
-            <td>${row.getEndDate()}</td>
-            <td>${row.getCategories()}</td>
-            <td><%@include file="statePrinter.jsp" %></td>
-            <td>${row.getWinner().getName()}</td>
-            <td><a href="cancelItem?username=${param.username}&itemId=${row.getId()}">Cancel</a></td>
-            </tr>
-        </c:forEach>
-        </table>
-        
+                <c:forEach items="${items}" var="row">
+                    <tr>
+                    <td style="font-weight: bold">${row.getName()}</td>
+                    <td>${row.getDescription()}</td>
+                    <td style="font-weight: bold">${row.getStartPrice()}</td>
+                    <td>${row.getDuration()} days</td>
+                    <td>${row.getStartDate()}</td>
+                    <td>${row.getEndDate()}</td>
+                    <td>${row.getCategories()}</td>
+                    <td style="font-weight: bold"><%@include file="statePrinter.jsp" %></td>
+                    <td>${row.getWinner().getName()}</td>
+                    <td><a href="cancelItem?username=${param.username}&itemId=${row.getId()}">Cancel</a></td>
+                    </tr>
+                </c:forEach>
+              </tbody>
+              </table>
+        </div>        
     </body>
 </html>

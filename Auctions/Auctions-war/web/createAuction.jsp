@@ -14,23 +14,43 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="min-height:0px;">
+                <div class="alert alert-info">Create auction</div>
+            </div>
+        </div>
         
-        <h1>Create Auction</h1>
-
+        
+        
         <form method="post" action="createAuction">
-            <p>Name: <input type="text" name="name"/></p>
-            <p>Description: <textarea type="text" name="description"></textarea></p>
-            <p>Start Price: <input type="text" name="startPrice"/></p>
-            <p>Duration: <input type="text" name="duration"/></p>
-
-            <p> Categories: 
-                <c:forEach var="row" items="${categories}">
-                    <input type="checkbox" name="category" value="${row.id}"/>${row.name} 
-                </c:forEach>
-            </p>
-            <p><input type="submit" value="create auction"/></p>
+            <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-1">Name</div>
+                  <div class="col-sm-1"><input type="text" name="name"/></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-1">Description</div>
+                  <div class="col-sm-1"><textarea type="text" name="description"></textarea></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-1">Start Price</div>
+                  <div class="col-sm-1"><input type="text" name="startPrice"/></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-1">Duration</div>
+                  <div class="col-sm-1"><input type="text" name="duration"/></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-1">Categories</div>
+                  <div class="col-sm-8">
+                    <c:forEach var="row" items="${categories}">
+                        <input type="checkbox" name="category" value="${row.id}"/>${row.name}
+                    </c:forEach></div>
+                </div>
+                <br/>
             
-    </form>
-
-</body>
+            <button type="submit" class="btn btn-info btn-lg" value="create auction">Create auction </button>   
+        </form>
+        </div>
+    </body>
 </html>

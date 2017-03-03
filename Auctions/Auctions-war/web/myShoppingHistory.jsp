@@ -13,23 +13,34 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <br/><br/><br/>
-        <h1>My transaction histories: </h1>
-        <table border="1">
-            <tr>
-                <td>Items</td>
-                <td>Bank Account</td>
-                <td>Transaction Date</td>
-                <td>Status</td>
-            </tr>
-            <c:forEach items="${histories}" var="row">
-                <tr>
-                <td>${row.getItems()}</td>
-                <td>${row.getBankAccount()}</td>
-                <td>${row.getTransactionDate()}</td>
-                <td>${row.getResult()}</td>
+        <br/><br/><br/>        
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="min-height:0px;">
+                <div class="alert alert-info">My transactions history</div>
+            </div>
+        </div>
+        
+        <div class="container">          
+            <table class="table table-bordered table-hover table-condensed">
+              <thead>
+                <tr class="bg-info">
+                  <th>Items</th>
+                  <th>Bank Account</th>
+                  <th>Transaction Date</th>
+                  <th>Status</th>
                 </tr>
-            </c:forEach>
-        </table>
+              </thead>
+              <tbody>
+                <c:forEach items="${histories}" var="row">
+                    <tr>
+                    <td style="font-weight: bold">${row.getItems()}</td>
+                    <td>${row.getBankAccount()}</td>
+                    <td>${row.getTransactionDate()}</td>
+                    <td style="font-weight: bold">${row.getResult()}</td>
+                    </tr>
+                </c:forEach>
+              </tbody>
+              </table>
+        </div>
     </body>
 </html>
